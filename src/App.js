@@ -3,17 +3,20 @@ import "./index.css";
 
 export default function App() {
   const [data, setData] = useState([]);
-  const getCountriesData = async () => {
-    try {
-      const res = await fetch("https://restcountries.com/v3.1/all");
-      const countries = await res.json();
-      setData(countries);
-    } catch (err) {
-      console.err(err);
-    }
-  };
+  // const getCountriesData = async () => {
+  //   try {
+  //     const res = await fetch("https://restcountries.com/v3.1/all");
+  //     const countries = await res.json();
+  //     setData(countries);
+  //   } catch (err) {
+  //     console.err(err);
+  //   }
+  // };
   useEffect(() => {
-    getCountriesData();
+    fetch("https://restcountries.com/v3.1/all")
+    .then((response)=>response.json())
+    .then((data)=> setData(data))
+    .catch((error)=>console.error("Error fetching data: ", error))
   }, []);
   return (
     <div className="App">
